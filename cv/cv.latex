@@ -1,0 +1,190 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "ModernCV" CV and Cover Letter
+% LaTeX Template
+% Version 1.11 (19/6/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Xavier Danaux (xdanaux@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the moderncv.cls and .sty files to be in the same
+% directory as this .tex file. These files provide the resume style and themes
+% used for structuring the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt,a4paper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+
+\moderncvstyle{classic} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{comment}
+
+\usepackage[scale=0.75]{geometry} % Reduce document margins
+%\setlength{\hintscolumnwidth}{3cm} % Uncomment to change the width of the dates column
+%\setlength{\makecvtitlenamewidth}{10cm} % For the 'classic' style, uncomment to adjust the width of the space allocated to your name
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%----------------------------------------------------------------------------------------
+
+\firstname{$firstName$} % Your first name
+\familyname{$familyName$} % Your last name
+
+\title{Curriculum Vitae}
+
+\newcommand{\cvitemspace}{\vspace{20pt}}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+$if(public-cv)$
+$else$
+% All information in this block is optional, comment out any lines you don't need
+\address{$address1$}{$address2$}
+\mobile{$mobile$}
+\email{$email$}
+\homepage{$website$}
+% \extrainfo{$headerExtraInfo$}
+% \quote{$quote$}
+
+\photo[70pt][0.4pt]{$picturePath$} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+$endif$
+
+\makecvtitle % Print the CV title
+
+%----------------------------------------------------------------------------------------
+%	PERSONAL SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Personal}
+$if(public-cv)$
+\begin{comment}
+\cventry{Address}{$address1$}{$address2$}{}{}{}
+\cventry{Mobile}{$mobile$}{}{}{}{}
+\cventry{E-Mail}{\emaillink{$email$}}{}{}{}{}
+\end{comment}
+$else$
+\cventry{Birth}{$birthDate$}{$birthPlace$}{}{}{}
+$endif$
+
+\cventry{Citizenship}{$citizenship$}{}{}{}{}
+\cventry{Languages}{
+    Mother tongue: $languages.mother$
+    $if(languages.others)$
+    $for(languages.others)$\newline $languages.others.name$: $languages.others.overall$ ($languages.others.other$)$endfor$
+    $endif$
+}{}{}{}{}
+\cventry{Ham Radio}{$hamRadio$}{}{}{}{}
+\cventry{Driving license}{$drivingLicense$}{}{}{}{}
+\cventry{PGP keys}{$pgp$}{}{}{}{}
+\cventry{Web}{\link[$website$]{$website$}}{}{}{}{}
+\cventry{GitLab/GitHub}{\link[gitlab.com/$gitlab$]{https://gitlab.com/$gitlab$}, \link[github.com/$github$]{https://github.com/$github$}}{}{}{}{}
+
+%----------------------------------------------------------------------------------------
+
+\section{Education}
+
+$for(education)$
+\cventry{$education.period$}{$education.title$}{\link[$education.where$]{$education.whereLink$}}{}{}{$education.score$$education.other$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Work experience}
+
+$for(work)$
+\cventry{$work.period$}{$work.title$}{$work.company$}{}{}
+{$if(work.duty)$ $work.duty$$endif$ $if(work.summary)$\\\textit{$work.summary$}$endif$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Technical Skills}
+
+$for(skills)$
+\cvitem{$skills.name$}{$skills.txt/first$}
+$for(skills.txt/rest)$\cvitem{}{$skills.txt$}$endfor$
+$endfor$
+
+\section{Communication skills}
+\cvitem{}{
+    \begin{itemize}
+        $for(communicationSkills)$
+        \item $communicationSkills$
+        $endfor$
+    \end{itemize}
+}
+    
+\section{Organisational / managerial skills}
+\cvitem{}{
+    \begin{itemize}
+        $for(organizationSkills)$
+        \item $organizationSkills$
+        $endfor$
+    \end{itemize}
+}
+%----------------------------------------------------------------------------------------
+
+\section{Projects}
+
+$for(projects)$
+\cventry{$projects.period$}{\link[$projects.title$]{$projects.link$}}{$projects.where$}{}{}
+{$if(projects.duty)$ $projects.duty$ \\$endif$ \textit{$projects.summary$}}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Awards - Certifications - Licenses}
+
+$for(certificates)$
+\cventry{$certificates.year$}{$certificates.title$}{$certificates.by$}{}{}{$certificates.other$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Voluntary}
+
+$for(voluntary)$
+\cventry{$voluntary.period$}{$voluntary.title$}{$voluntary.subtitle$}{$voluntary.where$}{}{$voluntary.other$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Thesis}
+
+$for(thesis)$
+\cvitem{$thesis.year$}{\textbf{\link[\emph{$thesis.title$}]{$thesis.link$}}}
+\cvitem{}{Supervisor: $thesis.supervisor$}
+\cvitem{}{$thesis.summary$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\section{Publications}
+
+$for(publications)$
+\cventry{$publications.year$}{\link[$publications.title$]{$publications.url$}}
+{$publications.authors$}{}{}{$publications.venue$ $publications.publisher$}
+$endfor$
+
+%----------------------------------------------------------------------------------------
+
+\vspace{1.5em}
+
+\cvitem{}{In compliance with the art. 13 GDPR 679/16 and Italian legislative decree no. 196 dated 30/06/2003, I hereby authorize
+the recipient of this document to use and process my personal details for the purpose of recruiting and selecting staff.}
+
+\end{document}

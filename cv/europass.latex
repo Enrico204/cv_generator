@@ -1,0 +1,183 @@
+% !TEX encoding = UTF-8
+% !TEX program = pdflatex
+% !TEX spellcheck = en_GB
+
+\documentclass[english,a4paper]{europasscv}
+\usepackage[english]{babel}
+\newcommand*{\link}[2][]{\href{#2}{#1}}
+
+\ecvname{$firstName$ $familyName$}
+$if(public-cv)$
+\ecvdateofbirth{$birthDate$}
+$else$
+\ecvaddress{$address1$, $address2$}
+\ecvmobile{$mobile$}
+\ecvemail{$email$}
+\ecvhomepage{$website$}
+\ecvgithubpage{github.com/$github$}
+\ecvgitlabpage{gitlab.com/$gitlab$}
+\ecvlinkedinpage{www.linkedin.com/in/$linkedin$}
+\ecvorcid[label, link]{$orcid$}
+
+% \ecvgender{Female}
+\ecvdateofbirth{$birthDate$}
+\ecvnationality{$nationality$}
+
+\ecvpicture[width=3.8cm]{$picturePath$}
+$endif$
+
+% \date{}
+
+\begin{document}
+  \begin{europasscv}
+
+% BEGIN COVER LETTER =============
+
+%     \thispagestyle{empty}
+%     \eclpersonalinfo
+%
+%     \ecladdressee{Contact person}{Name of organization}{Address of organization}{City}
+%
+%     \eclcitydatesubject{City}{\today}{Subject of this cover letter}
+%
+%     \eclopeningsalutation{Dear Sir}
+%     \eclmaincontent
+%     {Opening salutation.\bigskip}
+%
+%     {This is the main content.}
+%
+%     {Closing salutation.}
+%
+%     \eclclosingsalutation{Yours sincerely}
+%
+%     \eclsignature
+% %     \eclsignature[signature.jpg]
+% %     \eclsignature[signature.jpg][Dr. Katie Smith (custom signature)]
+%
+%     \pagebreak
+%     \setcounter{page}{1}
+
+
+% BEGIN CV =============
+
+  \ecvpersonalinfo
+
+  %\ecvbigitem{Job applied for}{European project manager}
+
+  \ecvsection{Work experience}
+
+  $for(work)$
+  \ecvtitle{$work.period$}{$work.title$}
+  \ecvitem{}{$work.company$}
+  $if(work.duty)$\ecvitem{}{\textit{$work.duty$}}$endif$
+  $if(work.summary)$\ecvitem{}{\textit{$work.summary$}}$endif$
+  $endfor$
+
+  \ecvsection{Education and training}
+
+  $for(education)$
+  \ecvtitle{$education.period$}{$education.title$}
+  \ecvitem{}{\link[$education.where$]{$education.whereLink$}}
+  \ecvitem{}{$education.score$$education.other$}
+  $endfor$  
+
+  %----------------------------------------------------------------------------------------
+  
+  \ecvsection{Personal skills}
+
+  \ecvmothertongue{$languages.mother$}
+  $if(languages.others)$
+    \ecvlanguageheader
+    $for(languages.others)$
+      \ecvlanguage{$languages.others.name$}{$languages.others.listening$}{$languages.others.reading$}{$languages.others.speaking$}{$languages.others.speaking$}{$languages.others.writing$}
+      $if(languages.others.other)$
+        \ecvlanguagecertificate{$languages.others.other$}
+      $endif$
+    $endfor$
+    \ecvlanguagefooter
+  $endif$
+  
+  \ecvblueitem{Communication skills}{
+  \begin{ecvitemize}
+    $for(communicationSkills)$
+    \item $communicationSkills$
+    $endfor$
+  \end{ecvitemize}
+  }
+  
+  \ecvblueitem{Organisational / managerial skills}{
+  \begin{ecvitemize}
+    $for(organizationSkills)$
+    \item $organizationSkills$
+    $endfor$
+  \end{ecvitemize}
+  }
+
+  \ecvdigitalcompetence{\ecvProficient}{\ecvProficient}{\ecvProficient}{\ecvProficient}{\ecvProficient}
+  
+  \ecvblueitem{Computer skills}{
+  \begin{ecvitemize}
+    $for(skills)$
+    \item \textbf{$skills.name$}: $skills.txt/first$
+    $for(skills.txt/rest)$\newline $skills.txt$$endfor$
+    $endfor$
+  \end{ecvitemize}
+  }
+  
+  %\ecvblueitem{Other skills}{}
+
+  %----------------------------------------------------------------------------------------
+  
+  \ecvsection{Certifications and Licenses}
+
+  \ecvtitle{Driving licence}{$drivingLicense$}
+
+  $for(certificates)$
+  \ecvtitle{$certificates.year$}{$certificates.title$}
+  \ecvitem{}{$certificates.by$}
+  \ecvitem{}{$certificates.other$}
+  $endfor$
+
+  %----------------------------------------------------------------------------------------
+  
+  \ecvsection{Additional information}
+  
+  \ecvblueitem{Projects}
+
+  $for(projects)$
+  \ecvtitle{$projects.period$}{\link[$projects.title$]{$projects.link$}}
+  \ecvitem{}{$projects.where$}
+  $if(work.duty)$\ecvitem{}{\textit{$work.duty$}}$endif$
+  $if(work.summary)$\ecvitem{}{\textit{$work.summary$}}$endif$
+  $endfor$
+
+  \ecvblueitem{Voluntary}
+
+  $for(voluntary)$
+  \ecvtitle{$voluntary.period$}{$voluntary.title$}
+  \ecvitem{}{$voluntary.subtitle$ - $voluntary.where$}
+  \ecvitem{}{$voluntary.other$}
+  $endfor$
+
+  \ecvblueitem{Thesis}
+
+  $for(thesis)$
+  \ecvtitle{$thesis.year$}{\link[$thesis.title$]{$thesis.link$}}
+  \ecvitem{}{Supervisor: $thesis.supervisor$}
+  \ecvitem{}{$thesis.summary$}
+  $endfor$
+  
+  \ecvblueitem{Publications}
+  
+  $for(publications)$
+  \ecvtitle{$publications.year$}{\link[$publications.title$]{$publications.url$}}
+  \ecvitem{}{$publications.authors$}
+  \ecvitem{}{$publications.venue$ $publications.publisher$}
+  $endfor$
+
+  \bigskip
+  In compliance with the art. 13 GDPR 679/16 and Italian legislative decree no. 196 dated 30/06/2003, I hereby authorize the recipient of this document to use and process my personal details for the purpose of recruiting and selecting staff.
+  
+  \end{europasscv}
+
+\end{document}
